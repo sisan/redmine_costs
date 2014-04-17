@@ -34,7 +34,7 @@ class Cost < ActiveRecord::Base
   def calcula_termino_contrato(project)    
     unless @project.cost.end_date.nil?
       @project = project
-      dt1 = DateTime.now
+      dt1 = Date.today
       dt2 = @project.cost.end_date
     
       #Fórmula que calcula a diferença
@@ -44,5 +44,4 @@ class Cost < ActiveRecord::Base
     return 0
   end
   
-
 end
