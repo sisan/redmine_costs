@@ -1,0 +1,42 @@
+
+<%= include_calendar_headers_tags %>
+<script type="text/javascript" charset="utf-8">
+	$(function() { 
+		$('#project_cost_attributes_start_date').datepicker(datepickerOptions);
+		$('#project_cost_attributes_end_date').datepicker(datepickerOptions); 
+	});
+</script>
+
+<% if @project.module_enabled?('redmine_costs') %>
+<% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'redmine_costs', :plugin => 'redmine_costs' %>
+<% end %>
+
+</div>
+<div style="clear:both;"></div>
+<div>
+<fieldset id="project_cost" class="box tabular">
+	<legend> Custos </legend>
+		
+			<%= form.fields_for :cost, (form.object.cost ? form.object.cost : Cost.new) do |cf|%>
+			<p>
+				R$ <%=cf.text_field :value  %> <font style="color: #AAAAAA; font-size: 0.9em";>formato: R$(999.999,99)</font>
+			</p>
+			<p>
+				<%=cf.text_field :start_date %>				
+			</p>
+			<p>	
+				<%=cf.text_field :end_date %>
+			</p>
+			<% end %>
+			
+		<div id="footer_cost">
+			<%= t(:helpers_messages_cost_title_footer)%>
+		</div>
+		
+</fieldset>
+<% end %>
+
+
+
+

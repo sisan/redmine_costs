@@ -1,0 +1,26 @@
+pt-BR:
+  redmine_costs_title: "Custos"
+  project_module_redmine_costs: "Custos"
+  
+   
+  activerecord_models_cost_id: "id"    
+  activerecord_models_cost_value: "Valor"
+  activerecord_models_cost_start_date: "Data Inicial"
+  activerecord_models_cost_end_date: "Data Final"
+  
+  activerecord_attributes_cost_value: "Valor"
+  activerecord_attributes_cost_start_date: "Data Inicial"
+  activerecord_attributes_cost_end_date: "Data Final"
+
+  field_start_date: Início
+  field_end_date: Término
+
+  
+  helpers_messages_cost_residual_value: "Valor restante"
+  helpers_messages_cost_issues_title: "Tarefas"
+  helpers_messages_cost_report_title: "Acompanhamento de custos do Projeto"
+  helpers_messages_cost_title_value: "Valor Total do contrato:"
+  helpers_messages_cost_title_period: "Período do Contrato:"
+  helpers_messages_cost_title_footer: "Plugin Custos ativado."
+  helpers_messages_cost_title_nodata: "Projeto sem custos."
+  helpers_messages_cost_no_date: "0."

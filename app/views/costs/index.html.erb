@@ -1,0 +1,66 @@
+<% content_for :header_tags do %>
+    <%= javascript_include_tag 'jquery.min.js', :plugin => 'redmine_costs' %>
+    <%= javascript_include_tag 'rails', :plugin => 'redmine_costs' %>
+<% end %>
+
+
+<h2><%= t :helpers_messages_cost_report_title %></h2>
+
+
+
+<% unless @project.cost.nil? %>
+<div class="splitcontentleft">
+	<div class="box tabular">
+		<div id="all_attributes">
+			
+			<h3><%= @project.name %></h3><hr><br/>			
+			<p>
+				 <%= t(:helpers_messages_cost_title_value) %> R$ <b> <%= @project.cost.value %> </b>
+			</p>
+			<p>
+				<%= t :helpers_messages_cost_title_period %> 
+				
+				<b>	<%= @project.cost.try(:start_date) %> a <%= @project.cost.try(:end_date) %>	</b>			
+			</p>
+			<div class="issue tracker-1 status-1 priority-2 priority-default created-by-me details">
+				<h3> Tarefas </h3>			
+				<% unless @project.issues.nil? %>
+				
+					<% @project.issues.each do |c| %>
+							<% unless c.cost_issue.nil? %>
+								<p>	<%= c.subject %> R$ <%= c.cost_issue.value  %><br /></p>
+							<% end %>
+					<% end %>
+					
+				<% else %>
+					<p id="errorExplanation">Projeto sem tarefas!</p>
+				<% end %>	
+			</div>
+		</div>
+		<hr>
+		<h2> Valor restante  R$ <%= @project.cost.calcula_valor_restante(@project) %> </h2>
+	
+	</div>
+
+</div>
+
+
+<%= render :partial => "costs/highcharts" %>
+
+
+<div style="clear:both;"></div>
+<div class="box tabular">
+	<div id="all_attributes">
+		<p class="nodata">Faltam <%= @project.cost.calcula_termino_contrato(@project) %></p>
+	</div>
+</div>
+<% else %>
+<div style="clear:both;"></div>
+<div class="box tabular">
+	<div id="all_attributes">
+		<p class="nodata"><%= t :helpers_messages_cost_title_nodata %></p>
+	</div>
+</div>
+<% end %>
+
+
