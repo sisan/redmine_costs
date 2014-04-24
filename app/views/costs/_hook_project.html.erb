@@ -20,13 +20,13 @@
 		
 			<%= form.fields_for :cost, (form.object.cost ? form.object.cost : Cost.new) do |cf|%>
 			<p>
-				R$ <%=cf.text_field :value  %> <font style="color: #AAAAAA; font-size: 0.9em";>formato: R$(999.999,99)</font>
+				R$ <%=cf.text_field :value, :size => 17 %> <font style="color: #AAAAAA; font-size: 0.9em";>formato: R$(999.999,99)</font>
 			</p>
 			<p>
-				<%=cf.text_field :start_date %>				
+				<%=cf.text_field :start_date, :size => 20 %>				
 			</p>
 			<p>	
-				<%=cf.text_field :end_date %>
+				<%=cf.text_field :end_date, :size => 20 %>
 			</p>
 			<% end %>
 			

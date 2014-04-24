@@ -2,23 +2,18 @@
 		<%= stylesheet_link_tag 'redmine_costs', :plugin => 'redmine_costs' %>
 <% end %>
 
-<script type="text/javascript" charset="utf-8">
-	
+<script type="text/javascript" charset="utf-8">	
 	$(document).ready(function(){
 		$('#is_payment').click(function(){
 			if (this.checked) {
-			     $('#mostra_valor').show();
 			     $('#cost_issue_value_p').html('<%= form.fields_for :cost_issue, (form.object.cost_issue ? form.object.cost_issue : CostIssue.new) do |cif|%> R$ <%= cif.text_field :value %>  <% end %>');
 			} else {
-			     $('#mostra_valor').hide();
 				 $('#cost_issue_value_p').empty();
 			}
-		});
-		
+		});		
 	});
 </script>
 	
-
 
 <% if @project.module_enabled?('redmine_costs') %>
 	<% unless @issue.cost_issue.nil? && params[:action] != "new" %>
@@ -28,17 +23,14 @@
 			<div>
 				<fieldset id="issue_cost_issue" class="box tabular">
 					<legend> Custos </legend>		
-						<p><input type="checkbox" name="is_payment" id="is_payment" value="1">Tarefa de pagamento?</p>
-						<div id="mostra_valor" style="display:none">
+						<p><input type="checkbox" name="is_payment" id="is_payment" value="1">Tarefa de pagamento?</p>					
 							<p id="cost_issue_value_p">										
-							</p>
-						</div>		
-						
+							</p>														
 					<div id="footer_cost">
 						<%= t(:helpers_messages_cost_title_footer)%>
 					</div>		
 				</fieldset>
-		<% else %>
+		<% elsif params[:action] != "update_form" %>
 			<div>
 				<fieldset id="issue_cost_issue" class="box tabular">
 					<legend> Custos </legend>

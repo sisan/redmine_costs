@@ -14,7 +14,7 @@ Redmine::Plugin.register :redmine_costs do
   
   #cria um modulo para ser adicionado ou removido do projeto
    project_module :redmine_costs do
-       permission :read_cost, {:costs => [:index]}, :public => true
+       permission :read_cost, {:costs => [:index]}, :public => false
    end
 
    menu :project_menu, :costs, { :controller => 'costs', :action => 'index' }, {:caption => 'Custos', :after => :activity}
