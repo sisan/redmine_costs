@@ -26,4 +26,56 @@ module CostsHelper
     end
     
     
+    def format_data_br(data)
+      data.strftime("%d/%m/%Y")
+    end
+    
+    def total_paid_or_no(project)
+       #total de tarefas concluídas (pagas)
+       tp = 0    
+       #total de tarefas em andamento (não-pagas)
+       tnp = 0
+
+       
+       project.issues.each do |c| 
+         unless c.cost_issue.nil?        
+            if c.done_ratio == 100
+               tp = tp + 1
+            else
+               tnp = tnp + 1
+           end       
+         end
+       end
+       
+      return "['Pago', #{tp}], ['Não-pago', #{tnp}]".html_safe
+     end
+    
+    
+      def total_values(project)
+           #valor total do projeto 
+           vt = project.cost.value    
+           #valor individual de cada tarefa do projeto
+           vpt = 0
+           #valor restante (total-tarefas pagas)
+           va = 0
+
+           project.issues.each do |c|      
+             unless c.cost_issue.nil?
+
+               #Somente irá subtrair do valor total do projeto tarefas que estiverem com o percentual de conclusão = 100%
+               if c.done_ratio == 100
+                 vpt = vpt + c.cost_issue.value
+               end          
+             end
+           end        
+           #Fórmula que calcula a diferença VT - VPT = VA (Valor Gasto)
+           va = vt - vpt
+           #Fórmula que calcula o valor restante (valor total - Valor Gasto)
+           vs = vt - va 
+
+
+           return "['Gasto', #{vs}], ['Restante', #{va}]".html_safe
+
+       end
+       
 end

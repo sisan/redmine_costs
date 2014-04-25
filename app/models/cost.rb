@@ -33,7 +33,8 @@ class Cost < ActiveRecord::Base
   end
   
   # Método que calcula o período de término do contrato entre a data atual e de fim do contrato.
-  def calcula_termino_contrato(project)    
+  def calcula_termino_contrato(project) 
+    @project = project   
       unless @project.cost.end_date.nil?
         @project = project
         dt1 = Date.parse(Time.now.to_s)

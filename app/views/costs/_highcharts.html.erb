@@ -1,20 +1,89 @@
 
 <script type="text/javascript" charset="utf-8">
+$(function () {
+    $('#paid_chart').highcharts({
+        chart: {
+            type: 'pie',
+            options3d: {
+				enabled: true,
+                alpha: 45,
+                beta: 0
+            }
+        },
+        title: {
+            text: 'Tarefas'
+        },
+        tooltip: {
+            pointFormat: '<b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                depth: 35,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.name}'
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Browser share',
+            data: [<%= total_paid_or_no(@project) %>]
+        }]
+    });
+});
 
+$(function () {
+    $('#values_chart').highcharts({
+        chart: {
+            type: 'pie',
+            options3d: {
+				enabled: true,
+                alpha: 45,
+                beta: 0
+            }
+        },
+        title: {
+            text: 'Pagamento'
+        },
+        tooltip: {
+            pointFormat: '<b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                depth: 35,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.name}'
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Browser share',
+            data: [<%= total_values(@project) %>]
+        }]
+    });
+});
 
 </script>
 
 <div class="splitcontentright">
-	<div class="box tabular">
+	<div >
 		<div id="all_attributes">
 			
-<h1> Gráficos </h1>
+			<h1> Gráficos </h1>
 
-<div id="orders_chart" style="width:560px; heigth:300px;">
-	
-	
-	
-</div>
+			<div id="values_chart" class="splitcontentleft">
+					
+			</div>
+
+			<div id="paid_chart"  class="splitcontentright">	
+			</div>	
 	
 
 		</div>

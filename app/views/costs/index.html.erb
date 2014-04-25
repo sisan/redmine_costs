@@ -18,7 +18,7 @@
 			</p>
 			<p>
 				<%= t :helpers_messages_cost_title_period %> 				
-				<b>	<%= @project.cost.try(:start_date) %> a <%= @project.cost.try(:end_date) %>	</b>			
+				<b>	<%= format_data_br(@project.cost.try(:start_date)) %> a <%= format_data_br(@project.cost.try(:end_date)) %>	</b>			
 			</p>
 		</div>
 	</div>	
