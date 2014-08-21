@@ -17,26 +17,25 @@ module CostsHelper
   end
   
   
-    def is_closed_issue(c)
+  def is_closed_issue(c)
       if c.done_ratio == 100
         return content_tag(:div, "Pago", :style => "background-color: #DCF3BC") 
       else
         return content_tag(:div, "Não-Pago", :style => "background-color: #FFB4B4")
       end
-    end
+  end
     
     
-    def format_data_br(data)
+  def format_data_br(data)
       data.strftime("%d/%m/%Y")
-    end
+  end
     
-    def total_paid_or_no(project)
+  def total_paid_or_no(project)
        #total de tarefas concluídas (pagas)
        tp = 0    
        #total de tarefas em andamento (não-pagas)
        tnp = 0
-
-       
+      
        project.issues.each do |c| 
          unless c.cost_issue.nil?        
             if c.done_ratio == 100
@@ -45,37 +44,31 @@ module CostsHelper
                tnp = tnp + 1
            end       
          end
-       end
-       
+       end     
       return "['Pago', #{tp}], ['Não-pago', #{tnp}]".html_safe
-     end
+  end
     
     
-      def total_values(project)
-           #valor total do projeto 
-           vt = project.cost.value    
-           #valor individual de cada tarefa do projeto
-           vpt = 0
-           #valor restante (total-tarefas pagas)
-           va = 0
+  def total_values(project)
+      #valor total do projeto 
+        vt = project.cost.value    
+      #valor individual de cada tarefa do projeto
+        vpt = 0
+      #valor restante (total-tarefas pagas)
+        va = 0
 
-           project.issues.each do |c|      
-             unless c.cost_issue.nil?
-
-               #Somente irá subtrair do valor total do projeto tarefas que estiverem com o percentual de conclusão = 100%
-               if c.done_ratio == 100
+      project.issues.each do |c|      
+          unless c.cost_issue.nil?
+            #Somente irá subtrair do valor total do projeto tarefas que estiverem com o percentual de conclusão = 100%
+            if c.done_ratio == 100
                  vpt = vpt + c.cost_issue.value
-               end          
-             end
-           end        
-           #Fórmula que calcula a diferença VT - VPT = VA (Valor Gasto)
-           va = vt - vpt
-           #Fórmula que calcula o valor restante (valor total - Valor Gasto)
-           vs = vt - va 
-
-
-           return "['Gasto', #{vs}], ['Restante', #{va}]".html_safe
-
-       end
-       
+            end          
+          end
+      end        
+      #Fórmula que calcula a diferença VT - VPT = VA (Valor Gasto)
+        va = vt - vpt
+      #Fórmula que calcula o valor restante (valor total - Valor Gasto)
+        vs = vt - va 
+      return "['Gasto', #{vs}], ['Restante', #{va}]".html_safe
+  end
 end

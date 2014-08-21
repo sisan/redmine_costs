@@ -9,23 +9,41 @@
 
 <% unless @project.cost.nil? %>
 <div class="splitcontentleft">
-	<div class="box tabular">
-		<div id="all_attributes">
+	
+	<div class="box tabular">	
+		<h3><%= @project.name %></h3><hr><br/>			
+		<p>
+			<%= t(:helpers_messages_cost_title_value) %> R$ <b> <%= @project.cost.value %> </b>
+		</p>
+		<% unless @project.cost.start_date.nil? && @project.cost.end_date.nil? %>
+		<p>
+			<%= t :helpers_messages_cost_title_period %> 				
+			<b>	<%= format_data_br(@project.cost.try(:start_date)) %> a <%= format_data_br(@project.cost.try(:end_date)) %>	</b>			
+		</p>
+		<% end %>		
+	</div>
+	<div style="clear:both;" ></div>
+	<div class="box tabular"> 
+		<h5><%= t(:helpers_messages_cost_efforts_number) %> </h5>	
+		<% unless @project.cost_efforts.empty? %>
+		<table class="list issues">
+			<tbody>
+				<% @project.cost_efforts.each do |ce| %> 
+				<tr class="hascontextmenu <%= cycle('odd', 'even') %>">
+					<td class="tracker"><%= ce.number %> </td>					
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+		<% else %>
+			<p class="nodata">Projeto sem número de empenho!</p>
+		<% end %>
+	</div>
 			
-			<h3><%= @project.name %></h3><hr><br/>			
-			<p>
-				 <%= t(:helpers_messages_cost_title_value) %> R$ <b> <%= @project.cost.value %> </b>
-			</p>
-			<p>
-				<%= t :helpers_messages_cost_title_period %> 				
-				<b>	<%= format_data_br(@project.cost.try(:start_date)) %> a <%= format_data_br(@project.cost.try(:end_date)) %>	</b>			
-			</p>
-		</div>
-	</div>	
 	<div style="clear:both;" ></div>
 		<div class="box tabular">
 			<h3> Tarefas </h3>			
-			<% unless @project.issues.nil? %>				
+			<% unless @project.issues.empty? %>				
 			<table class="list issues">
 			    <thead>
 				  <tr>
@@ -48,8 +66,8 @@
 				<% end %>
 				</tbody>
 			</table>				
-				<% else %>
-					<p id="errorExplanation">Projeto sem tarefas!</p>
+				<% else%>
+					<p class="nodata">Projeto sem tarefas!</p>
 				<% end %>	
 		</div>
 		

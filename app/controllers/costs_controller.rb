@@ -5,6 +5,7 @@ class CostsController < ApplicationController
   def index
     
     @cost = Cost.where(:project_id => @project.id)
+    @cost_effort = CostEffort.where(:project_id => @project.id)
     
      respond_to do |format|
         format.html 
@@ -12,9 +13,11 @@ class CostsController < ApplicationController
       end      
   end
   
-  def show
+  def show 
+     
    @cost = Cost.where(:project_id => @project.id) 
-
+   @cost_effort = CostEffort.where(:project_id => @project.id)
+   
   end
   
 end
