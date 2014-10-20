@@ -1,8 +1,7 @@
 pt-BR:
   redmine_costs_title: "Custos"
   project_module_redmine_costs: "Custos"
-  
-   
+     
   activerecord_models_cost_id: "id"    
   activerecord_models_cost_value: "Valor"
   activerecord_models_cost_start_date: "Data Inicial"
@@ -14,7 +13,8 @@ pt-BR:
 
   field_start_date: Início
   field_end_date: Término
-
+  field_number: ""
+  field__destroy: "remover"
   
   helpers_messages_cost_residual_value: "Valor restante"
   helpers_messages_cost_issues_title: "Tarefas"
@@ -24,3 +24,4 @@ pt-BR:
   helpers_messages_cost_title_footer: "Plugin Custos ativado."
   helpers_messages_cost_title_nodata: "Projeto sem custos."
   helpers_messages_cost_no_date: "0."
+  helpers_messages_cost_efforts_number: "Número(s) de Empenho"

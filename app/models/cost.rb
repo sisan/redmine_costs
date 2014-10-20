@@ -4,7 +4,7 @@ class Cost < ActiveRecord::Base
   include Redmine::SafeAttributes
   belongs_to :project
   attr_accessible :value, :start_date, :end_date, :project_id
- 
+  
    # Gem brazilian-rails 
    usar_como_dinheiro :value
   

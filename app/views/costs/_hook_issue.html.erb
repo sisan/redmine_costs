@@ -44,6 +44,17 @@
 					</div>		
 				</fieldset>
 		<% end %>
+	<% else %>
+		<div>
+			<fieldset id="issue_cost_issue" class="box tabular">
+				<legend> Custos </legend>		
+					<p><input type="checkbox" name="is_payment" id="is_payment" value="1">Tarefa de pagamento?</p>					
+						<p id="cost_issue_value_p">										
+						</p>														
+				<div id="footer_cost">
+					<%= t(:helpers_messages_cost_title_footer)%>
+				</div>		
+			</fieldset>
 	<% end %>
 <% end %>
 

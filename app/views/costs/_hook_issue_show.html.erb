@@ -1,0 +1,16 @@
+
+<% if @project.module_enabled?('redmine_costs') %>
+	
+  <% unless @issue.cost_issue.nil? && params[:action] != "new" %>
+   		<% unless @issue.cost_issue.value.nil? %>
+			<hr>
+			<div class="relations">
+				<p><strong>Valor: </strong> R$ <%= @issue.cost_issue.value %></p>
+					<div id="footer_cost_right">
+						<%= t(:helpers_messages_cost_title_footer) %>
+					</div>				
+			</div>	
+    	<% end %>
+  <% end %>
+	
+ <% end %>	

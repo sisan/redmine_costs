@@ -8,9 +8,9 @@
 </script>
 
 <% if @project.module_enabled?('redmine_costs') %>
-<% content_for :header_tags do %>
-    <%= stylesheet_link_tag 'redmine_costs', :plugin => 'redmine_costs' %>
-<% end %>
+	<% content_for :header_tags do %>
+		<%= stylesheet_link_tag 'redmine_costs', :plugin => 'redmine_costs' %>
+	<% end %>
 
 </div>
 <div style="clear:both;"></div>
@@ -18,25 +18,56 @@
 <fieldset id="project_cost" class="box tabular">
 	<legend> Custos </legend>
 		
-			<%= form.fields_for :cost, (form.object.cost ? form.object.cost : Cost.new) do |cf|%>
-			<p>
-				R$ <%=cf.text_field :value, :size => 17 %> <font style="color: #AAAAAA; font-size: 0.9em";>formato: R$(999.999,99)</font>
-			</p>
-			<p>
-				<%=cf.text_field :start_date, :size => 20 %>				
-			</p>
-			<p>	
-				<%=cf.text_field :end_date, :size => 20 %>
-			</p>
-			<% end %>
-			
-		<div id="footer_cost">
-			<%= t(:helpers_messages_cost_title_footer)%>
+	<div class="splitcontent">
+		<div class="splitcontentleft">
+			<%= form.fields_for :cost, (form.object.cost ? form.object.cost : Cost.new) do |cf| %>
+				<p>
+					R$ <%=cf.text_field :value, :size => 17 %> <font style="color: #AAAAAA; font-size: 0.9em";>formato: R$(999.999,99)</font>
+				</p>
+				<p>
+					<%=cf.text_field :start_date, :size => 20 %>				
+				</p>
+				<p>	
+					<%=cf.text_field :end_date, :size => 20 %>
+				</p>
+			<% end %>	
+		</div>								
+		<div class="splitcontentright">	
+			<fieldset id="project_cost" class="box tabular">
+				<legend> Número(s) de Empenho </legend>		
+							
+				<%= form.fields_for :cost_efforts do |f| %>					  
+					<p><%= f.check_box :_destroy %><%= f.text_field :number, :size => 20 %></p>				
+				<% end %>
+				<a class="adicionar">Adicionar</a>
+				<div id="NewBoxFields">					    
+				</div>
+				
+			</fieldset>
 		</div>
 		
+	</div>
+	<div id="footer_cost">
+			<%= t(:helpers_messages_cost_title_footer)%>
+	</div>		
 </fieldset>
 <% end %>
 
 
-
+<script type="text/javascript">  
+	$(document).ready(function(){    
+         $(".adicionar").live('click', function(){  
+			  time = new Date().getTime()
+              $("#NewBoxFields").append("<p><input id='project_cost_efforts_attributes_" + time + "_number' type='text' size='20' name='project[cost_efforts_attributes][" + time + "][number]'><a class='remover'>Remover</a></p>");  
+              return false;  
+         })  
+         // Remove o campo selecionado  
+         $(".remover").live('click', function(){  
+              var id = $(".remover").index(this);  
+              $(".remover").eq(id).parent().slideUp('fast', function() {  
+                   $(this).remove();  
+              })  
+         }) 
+    })
+</script>
 
