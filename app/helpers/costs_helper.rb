@@ -68,7 +68,20 @@ module CostsHelper
       #Fórmula que calcula a diferença VT - VPT = VA (Valor Gasto)
         va = vt - vpt
       #Fórmula que calcula o valor restante (valor total - Valor Gasto)
-        vs = vt - va 
-      return "['Gasto', #{vs}], ['Restante', #{va}]".html_safe
+        vs = vt - va
+        
+        xva = va.to_s.split(",").first.gsub!(".","")
+        xvs = vs.to_s.split(",").first.gsub!(".","")
+        
+        if xva.blank?
+          xva = 0
+        end
+      
+        if xvs.blank?
+          xvs = 0
+        end
+     
+        
+      return "['Gasto', #{xvs}], ['Restante', #{xva}]".html_safe
   end
 end
